@@ -1,5 +1,3 @@
-
-
 const SUITS = ["♠", "♣", "♥", "♦"]
 const VALUES = [
     `A`, 
@@ -33,10 +31,19 @@ const cardValueMap = {
 }
 
 
+var mainDeck = ['k', 'k', 'k', 'k', 'q', 'q', 'q', 'q', 'j', 'j', 'j', 'j', 10, 10, 10, 10, 9, 9, 9, 9, 8, 8, 8, 8, 7, 7, 7, 7, 6, 6, 6, 6, 5, 5, 5, 5, 4, 4, 4, 4, 3, 3, 3, 3, 2, 2, 2, 2, 'a', 'a', 'a', 'a'];
 
+function shuffle() {
+    for(let i = this.numberOfCards-1; i > 0; i--) {
+    const newIndex = Math.floor(Math.random() * (i + 1));
+    const oldValue = this.cards[newIndex];
+    this.cards[newIndex] = this.cards[i];
+    this.cards[i] = oldValue;
+}
 
+}
 
-
+shuffle(mainDeck);
 
 class Deck {
     constructor (cards = freshDeck()) {
@@ -50,14 +57,7 @@ class Deck {
     
      
 
-    shuffle() {
-        for(let i = this.numberOfCards-1; i > 0; i--) {
-        const newIndex = Math.floor(Math.random() * (i + 1));
-        const oldValue = this.cards[newIndex];
-        this.cards[newIndex] = this.cards[i];
-        this.cards[i] = oldValue;
-    }
-    }
+    
 
 }
 
@@ -87,17 +87,17 @@ class Player {
 
 
 const deck = new Deck();
-deck.shuffle()
 
 
-const deckMidpoint = Math.ceil(deck.numberOfCards / 2)
+
+
 
 const player1 = new Player('Player 1', []);
-player1.deck = deck.cards.slice(0, deckMidpoint);
+player1.deck = mainDeck.slice(0, 26);
 console.log('Player 1: ' + player1.deck);
 
 const player2 = new Player('Player 2', []);
-player2.deck = deck.cards.slice(deckMidpoint, deck.numberOfCards);
+player2.deck = mainDeck.slice(26, 52);
 console.log('Player 2: ' + player2.deck);
 
 
